@@ -6,7 +6,13 @@ const Game = require("../models/game.js");
 // INDEX PAGE
 // GET /games
 router.get("/", async (req, res) => {
-  res.render("games/index.ejs");
+  try {
+    res.locals.games = await Game.find({ owner: req.session.user._id });
+    res.render("games/index.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
 });
 
 module.exports = router;

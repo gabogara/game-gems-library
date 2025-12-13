@@ -7,6 +7,17 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
+
     <h1>My Games</h1>
+
+    <% if (!games.length) { %>
+    <p>No games yet.</p>
+    <% } else { %>
+    <ul>
+      <% games.forEach(game => { %>
+      <li><%= game.title %></li>
+      <% }) %>
+    </ul>
+    <% } %>
   </body>
 </html>

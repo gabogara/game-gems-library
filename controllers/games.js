@@ -15,14 +15,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// NEW Game PAGE
-// GET /Game/new
+// NEW Game Page
+// GET /games/new
 router.get("/new", (req, res) => {
   res.render("games/new.ejs");
 });
 
 // CREATE GAME
-// POST /game
+// POST /games
 router.post("/", async (req, res) => {
   try {
     req.body.owner = req.session.user._id;

@@ -15,4 +15,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+// NEW Game PAGE
+// GET /Game/new
+router.get("/new", (req, res) => {
+  res.render("games/new");
+});
+
 module.exports = router;

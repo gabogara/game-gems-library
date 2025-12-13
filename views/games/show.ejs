@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= game.title %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1><%= game.title %></h1>
+
+    <p><strong>Genre:</strong> <%= game.genre %></p>
+
+    <% if (game.platform) { %>
+    <p><strong>Platform:</strong> <%= game.platform %></p>
+    <% } %> <% if (game.releaseYear) { %>
+    <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
+    <% } %> <% if (game.description) { %>
+    <p><strong>Description:</strong> <%= game.description %></p>
+    <% } %> <% if (game.coverImageUrl) { %>
+    <img src="<%= game.coverImageUrl %>" alt="<%= game.title %>" width="250" />
+    <% } %>
+
+    <p><a href="/games">Back to My Games</a></p>
+  </body>
+</html>

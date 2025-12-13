@@ -16,7 +16,10 @@
     <% } else { %>
     <ul>
       <% games.forEach(game => { %>
-      <li><%= game.title %></li>
+      <li>
+        <a href="/games/<%= game._id %>"><%= game.title %></a>
+      </li>
+
       <% }) %>
     </ul>
     <% } %>

@@ -8,6 +8,9 @@ const morgan = require("morgan");
 const session = require("express-session");
 
 const authController = require("./controllers/auth.js");
+const gamesController = require("./controllers/games.js");
+const reviewsController = require("./controllers/reviews.js");
+
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
@@ -39,6 +42,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authController);
+
+app.use("/games", gamesController);
+app.use("/reviews", reviewsController);
+
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

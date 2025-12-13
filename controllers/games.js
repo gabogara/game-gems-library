@@ -21,4 +21,17 @@ router.get("/new", (req, res) => {
   res.render("games/new.ejs");
 });
 
+// CREATE GAME
+// POST /game
+router.post("/", async (req, res) => {
+  try {
+    req.body.owner = req.session.user._id;
+    await Game.create(req.body);
+    res.redirect("/games");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/games/new");
+  }
+});
+
 module.exports = router;

@@ -34,4 +34,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+// SHOW GAMES PAGE
+// GET /games/:gameId
+router.get("/:gameId", async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.gameId);
+    res.locals.game = game;
+    res.render("games/show.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 module.exports = router;

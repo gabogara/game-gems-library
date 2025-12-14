@@ -51,7 +51,10 @@ router.get("/:gameId", async (req, res) => {
 // DELETE /games/:gameId
 router.delete("/:gameId", async (req, res) => {
   try {
-    await Game.deleteOne({ _id: req.params.gameId });
+    const result = await Game.deleteOne({
+      _id: req.params.gameId,
+      owner: req.session.user._id,
+    });
     res.redirect("/games");
   } catch (error) {
     console.log(error);

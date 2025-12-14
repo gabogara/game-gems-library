@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Game = require("../models/game.js");
+const Review = require("../models/review.js");
 
 // INDEX PAGE
 // GET /games
@@ -87,6 +88,10 @@ router.get("/:gameId", async (req, res) => {
   try {
     const game = await Game.findById(req.params.gameId);
     res.locals.game = game;
+
+    res.locals.reviews = await Review.find({ game: req.params.gameId })
+    .populate("author", "username")
+    .sort({ createdAt: -1 });
     res.render("games/show.ejs");
   } catch (error) {
     console.log(error);

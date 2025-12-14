@@ -61,4 +61,17 @@ router.delete("/:gameId", async (req, res) => {
     res.redirect("/");
   }
 });
+
+// EDIT GAME PAGE
+// GET /games/:gameId/edit
+router.get("/:gameId/edit", async (req, res) => {
+  try {
+    res.locals.game = await Game.findById(req.params.gameId);
+    res.render("games/edit.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 module.exports = router;

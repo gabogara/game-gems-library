@@ -47,4 +47,15 @@ router.get("/:gameId", async (req, res) => {
   }
 });
 
+// DELETE GAME
+// DELETE /games/:gameId
+router.delete("/:gameId", async (req, res) => {
+  try {
+    await Game.deleteOne({ _id: req.params.gameId });
+    res.redirect("/games");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 module.exports = router;

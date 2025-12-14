@@ -34,13 +34,32 @@ router.post("/", async (req, res) => {
   }
 });
 
-// SHOW GAMES PAGE
-// GET /games/:gameId
-router.get("/:gameId", async (req, res) => {
+// EDIT GAME PAGE
+// GET /games/:gameId/edit
+router.get("/:gameId/edit", async (req, res) => {
+  try {
+    res.locals.game = await Game.findById(req.params.gameId);
+    res.render("games/edit.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
+// UPDATE GAME
+// PUT /games/:gameId
+router.put("/:gameId", async (req, res) => {
   try {
     const game = await Game.findById(req.params.gameId);
-    res.locals.game = game;
-    res.render("games/show.ejs");
+    game.title = req.body.title;
+    game.genre = req.body.genre;
+    game.platform = req.body.platform;
+    game.releaseYear = req.body.releaseYear;
+    game.description = req.body.description;
+    game.coverImageUrl = req.body.coverImageUrl;
+
+    await game.save();
+    res.redirect(`/games/${game._id}`);
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -62,12 +81,13 @@ router.delete("/:gameId", async (req, res) => {
   }
 });
 
-// EDIT GAME PAGE
-// GET /games/:gameId/edit
-router.get("/:gameId/edit", async (req, res) => {
+// SHOW GAMES PAGE
+// GET /games/:gameId
+router.get("/:gameId", async (req, res) => {
   try {
-    res.locals.game = await Game.findById(req.params.gameId);
-    res.render("games/edit.ejs");
+    const game = await Game.findById(req.params.gameId);
+    res.locals.game = game;
+    res.render("games/show.ejs");
   } catch (error) {
     console.log(error);
     res.redirect("/");

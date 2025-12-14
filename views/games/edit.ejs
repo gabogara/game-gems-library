@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit <%= game.title %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1>Edit Game</h1>
+
+    <form action="/games/<%= game._id %>?_method=PUT" method="POST">
+      <label>
+        Title:
+        <input type="text" name="title" required value="<%= game.title %>" />
+      </label>
+
+      <label>
+        Genre:
+        <select name="genre" required>
+          <option value="Action" <%= game.genre === "Action" ? "selected" : "" %>>Action</option>
+          <option value="Adventure" <%= game.genre === "Adventure" ? "selected" : "" %>>Adventure</option>
+          <option value="Action-Adventure" <%= game.genre === "Action-Adventure" ? "selected" : "" %>>Action-Adventure</option>
+          <option value="RPG" <%= game.genre === "RPG" ? "selected" : "" %>>RPG</option>
+          <option value="JRPG" <%= game.genre === "JRPG" ? "selected" : "" %>>JRPG</option>
+          <option value="Strategy" <%= game.genre === "Strategy" ? "selected" : "" %>>Strategy</option>
+          <option value="Tactical" <%= game.genre === "Tactical" ? "selected" : "" %>>Tactical</option>
+          <option value="Shooter" <%= game.genre === "Shooter" ? "selected" : "" %>>Shooter</option>
+          <option value="Platformer" <%= game.genre === "Platformer" ? "selected" : "" %>>Platformer</option>
+          <option value="Puzzle" <%= game.genre === "Puzzle" ? "selected" : "" %>>Puzzle</option>
+          <option value="Fighting" <%= game.genre === "Fighting" ? "selected" : "" %>>Fighting</option>
+          <option value="Racing" <%= game.genre === "Racing" ? "selected" : "" %>>Racing</option>
+          <option value="Simulation" <%= game.genre === "Simulation" ? "selected" : "" %>>Simulation</option>
+          <option value="Sports" <%= game.genre === "Sports" ? "selected" : "" %>>Sports</option>
+          <option value="Horror" <%= game.genre === "Horror" ? "selected" : "" %>>Horror</option>
+          <option value="Metroidvania" <%= game.genre === "Metroidvania" ? "selected" : "" %>>Metroidvania</option>
+          <option value="Roguelike" <%= game.genre === "Roguelike" ? "selected" : "" %>>Roguelike</option>
+          <option value="Indie" <%= game.genre === "Indie" ? "selected" : "" %>>Indie</option>
+          <option value="Other" <%= game.genre === "Other" ? "selected" : "" %>>Other</option>
+        </select>
+      </label>
+
+      <label>
+        Platform:
+        <input type="text" name="platform" value="<%= game.platform || '' %>" />
+      </label>
+
+      <label>
+        Release Year:
+        <input type="number" name="releaseYear" value="<%= game.releaseYear || '' %>" />
+      </label>
+
+      <label>
+        Description:
+        <textarea name="description"><%= game.description || '' %></textarea>
+      </label>
+
+      <label>
+        Cover Image URL:
+        <input type="text" name="coverImageUrl" value="<%= game.coverImageUrl || '' %>" />
+      </label>
+
+      <button type="submit">Update Game</button>
+    </form>
+
+    <p><a href="/games">Cancel</a></p>
+  </body>
+</html>

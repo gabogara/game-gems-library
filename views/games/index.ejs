@@ -18,6 +18,10 @@
       <% games.forEach(game => { %>
       <li>
         <a href="/games/<%= game._id %>"><%= game.title %></a>
+
+        <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
+          <button type="submit">Delete</button>
+        </form>
       </li>
 
       <% }) %>

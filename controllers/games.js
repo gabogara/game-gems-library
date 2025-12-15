@@ -35,6 +35,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+// CREATE REVIEW
+// POST /games/:gameId/reviews
+router.post("/:gameId/reviews", async (req, res) => {
+  try {
+    req.body.author = req.session.user._id;
+    req.body.game = req.params.gameId;
+    await Review.create(req.body);
+    res.redirect(`/games/${req.params.gameId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 // EDIT GAME PAGE
 // GET /games/:gameId/edit
 router.get("/:gameId/edit", async (req, res) => {
@@ -90,8 +104,8 @@ router.get("/:gameId", async (req, res) => {
     res.locals.game = game;
 
     res.locals.reviews = await Review.find({ game: req.params.gameId })
-    .populate("author", "username")
-    .sort({ createdAt: -1 });
+      .populate("author", "username")
+      .sort({ createdAt: -1 });
     res.render("games/show.ejs");
   } catch (error) {
     console.log(error);

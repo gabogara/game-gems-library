@@ -9,5 +9,39 @@
     <%- include('../partials/_navbar.ejs') %>
 
     <h1>Edit Review</h1>
+    <form
+      action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=PUT"
+      method="POST"
+    >
+      <label>
+        Rating (1-5):
+        <input
+          type="number"
+          name="rating"
+          min="1"
+          max="5"
+          required
+          value="<%= review.rating %>"
+        />
+      </label>
+
+      <label>
+        Comment:
+        <textarea name="comment" required><%= review.comment %></textarea>
+      </label>
+
+      <label>
+        Played on:
+        <input
+          type="date"
+          name="playedOn"
+          value="<%= review.playedOn ? new Date(review.playedOn).toISOString().slice(0,10) : '' %>"
+        />
+      </label>
+
+      <button type="submit">Update Review</button>
+    </form>
+
+    <p><a href="/games/<%= game._id %>">Cancel</a></p>
   </body>
 </html>

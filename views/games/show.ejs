@@ -21,6 +21,21 @@
     <% } %> <% if (game.coverImageUrl) { %>
     <img src="<%= game.coverImageUrl %>" alt="<%= game.title %>" width="250" />
     <% } %>
+    <h2>Reviews</h2>
+
+    <% if (!reviews || reviews.length === 0) { %>
+    <p>No reviews yet.</p>
+    <% } else { %>
+    <ul>
+      <% reviews.forEach((review) => { %>
+      <li>
+        <strong><%= review.rating %>/5</strong>
+        — <%= review.comment %> <% if (review.author) { %> (by <%=
+        review.author.username %>) <% } %>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
 
     <p><a href="/games">Back to My Games</a></p>
   </body>

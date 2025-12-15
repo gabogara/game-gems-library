@@ -31,7 +31,15 @@
       <li>
         <strong><%= review.rating %>/5</strong>
         — <%= review.comment %> <% if (review.author) { %> (by <%=
-        review.author.username %>) <% } %>
+        review.author.username %>) <% } %> <% if (currentUser && review.author
+        && String(review.author._id) === String(currentUser._id)) { %>
+        <form
+          action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
       </li>
       <% }) %>
     </ul>

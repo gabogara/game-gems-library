@@ -49,6 +49,22 @@ router.post("/:gameId/reviews", async (req, res) => {
   }
 });
 
+// DELETE REVIEW
+// DELETE /games/:gameId/reviews/:reviewId
+router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
+  try {
+    await Review.deleteOne({
+      _id: req.params.reviewId,
+      author: req.session.user._id,
+      game: req.params.gameId,
+    });
+    res.redirect(`/games/${req.params.gameId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 // EDIT GAME PAGE
 // GET /games/:gameId/edit
 router.get("/:gameId/edit", async (req, res) => {

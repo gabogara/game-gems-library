@@ -35,6 +35,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+// EDIT REVIEW PAGE
+// GET /games/:gameId/reviews/:reviewId/edit
+router.get("/:gameId/reviews/:reviewId/edit", async (req, res) => {
+  try {
+    res.locals.game = await Game.findById(req.params.gameId);
+    res.locals.review = await Review.findById(req.params.reviewId);
+    res.render("reviews/edit.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 // CREATE REVIEW
 // POST /games/:gameId/reviews
 router.post("/:gameId/reviews", async (req, res) => {

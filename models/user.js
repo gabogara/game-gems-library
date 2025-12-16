@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     },
     favoriteGenre: String,
     bio: String,
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
   },
   { timestamps: true }
 );

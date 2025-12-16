@@ -36,14 +36,15 @@
         <form
           action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE"
           method="POST"
+          style="display: inline"
         >
           <button type="submit">Delete</button>
         </form>
-        <% if (currentUser && review.author && String(review.author._id) ===
-        String(currentUser._id)) { %>
+
         <a href="/games/<%= game._id %>/reviews/<%= review._id %>/edit">Edit</a>
-        <% } %> <% } %>
+        <% } %>
       </li>
+
       <% }) %>
     </ul>
     <% } %>

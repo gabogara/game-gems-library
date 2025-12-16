@@ -40,7 +40,17 @@ router.post("/", async (req, res) => {
 router.get("/:gameId/reviews/:reviewId/edit", async (req, res) => {
   try {
     res.locals.game = await Game.findById(req.params.gameId);
-    res.locals.review = await Review.findById(req.params.reviewId);
+
+    res.locals.review = await Review.findOne({
+      _id: req.params.reviewId,
+      author: req.session.user._id,
+      game: req.params.gameId,
+    });
+
+    if (!res.locals.review) {
+      return res.redirect(`/games/${req.params.gameId}`);
+    }
+
     res.render("reviews/edit.ejs");
   } catch (error) {
     console.log(error);

@@ -12,6 +12,7 @@ const gamesController = require("./controllers/games.js");
 const reviewsController = require("./controllers/reviews.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
+const comunityGamers = require("./controllers/communityGamers.js");
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
@@ -39,12 +40,9 @@ app.use(passUserToView);
 app.use("/auth", authController);
 
 app.use(isSignedIn);
+app.use("/", comunityGamers);
 app.use("/games", gamesController);
 app.use("/reviews", reviewsController);
-
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

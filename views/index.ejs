@@ -6,10 +6,28 @@
     <title>Game Gems Library</title>
   </head>
   <body>
-    <%- include('./partials/_navbar.ejs') %> <% if (currentUser) { %>
-    <h1>Welcome to Game Gems Library, <%= currentUser.username %>!</h1>
+    <%- include('./partials/_navbar.ejs') %>
+
+    <h1>Games by other users</h1>
+
+    <% if (!games || games.length === 0) { %>
+    <p>No games yet.</p>
     <% } else { %>
-    <h1>Welcome to Game Gems Library!</h1>
+    <ul>
+      <% games.forEach(game => { %>
+      <li>
+        <a href="/games/<%= game._id %>"><%= game.title %></a>
+        <% if (game.coverImageUrl) { %>
+        <img
+          src="<%= game.coverImageUrl %>"
+          alt="<%= game.title %>"
+          width="150"
+          height="150"
+        />
+        <% } %> <% if (game.owner) { %> — by <%= game.owner.username %> <% } %>
+      </li>
+      <% }) %>
+    </ul>
     <% } %>
   </body>
 </html>

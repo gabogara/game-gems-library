@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Game = require("../models/game.js");
 const Review = require("../models/review.js");
+const User = require("../models/user.js");
 
 // INDEX PAGE
 // GET /games
@@ -96,6 +97,23 @@ router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
     res.redirect("/");
   }
 });
+
+// ADD FAVORITE
+// POST /games/:gameId/favorite
+router.post("/:gameId/favorite", async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.session.user._id },
+      { $addToSet: { favorites: req.params.gameId } } 
+    );
+
+    res.redirect(`/games/${req.params.gameId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 
 // CREATE REVIEW
 // POST /games/:gameId/reviews

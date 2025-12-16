@@ -114,6 +114,21 @@ router.post("/:gameId/favorite", async (req, res) => {
   }
 });
 
+// REMOVE FAVORITE
+// POST /games/:gameId/unfavorite
+router.post("/:gameId/unfavorite", async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.session.user._id },
+      { $pull: { favorites: req.params.gameId } }
+    );
+
+    res.redirect(`/games/${req.params.gameId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 
 // CREATE REVIEW
 // POST /games/:gameId/reviews

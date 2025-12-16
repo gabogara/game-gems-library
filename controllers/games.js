@@ -16,21 +16,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// OTHER USERS GAMES PAGE
-// GET /games/all
-router.get("/all", async (req, res) => {
-  try {
-    res.locals.games = await Game.find({ owner: { $ne: req.session.user._id } })
-      .populate("owner", "username")
-      .sort({ createdAt: -1 });
-
-    res.render("games/all.ejs");
-  } catch (error) {
-    console.log(error);
-    res.redirect("/");
-  }
-});
-
 // NEW Game Page
 // GET /games/new
 router.get("/new", (req, res) => {

@@ -101,8 +101,18 @@ router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
 // POST /games/:gameId/reviews
 router.post("/:gameId/reviews", async (req, res) => {
   try {
+    const existing = await Review.findOne({
+      game: req.params.gameId,
+      author: req.session.user._id,
+    });
+
+    if (existing) {
+      return res.redirect(`/games/${req.params.gameId}`);
+    }
+
     req.body.author = req.session.user._id;
     req.body.game = req.params.gameId;
+
     await Review.create(req.body);
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {

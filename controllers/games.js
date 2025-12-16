@@ -48,13 +48,14 @@ router.get("/:gameId/reviews/:reviewId/edit", async (req, res) => {
   }
 });
 
-// CREATE REVIEW
-// POST /games/:gameId/reviews
-router.post("/:gameId/reviews", async (req, res) => {
+// UPDATE REVIEW
+// PUT /games/:gameId/reviews/:reviewId
+router.put("/:gameId/reviews/:reviewId", async (req, res) => {
   try {
-    req.body.author = req.session.user._id;
-    req.body.game = req.params.gameId;
-    await Review.create(req.body);
+    await Review.updateOne(
+      { _id: req.params.reviewId, author: req.session.user._id, game: req.params.gameId },
+      { rating: req.body.rating, comment: req.body.comment, playedOn: req.body.playedOn }
+    );
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);
@@ -77,6 +78,22 @@ router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
     res.redirect("/");
   }
 });
+
+// CREATE REVIEW
+// POST /games/:gameId/reviews
+router.post("/:gameId/reviews", async (req, res) => {
+  try {
+    req.body.author = req.session.user._id;
+    req.body.game = req.params.gameId;
+    await Review.create(req.body);
+    res.redirect(`/games/${req.params.gameId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
+
 
 // EDIT GAME PAGE
 // GET /games/:gameId/edit

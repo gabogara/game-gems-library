@@ -168,6 +168,12 @@ router.get("/:gameId", async (req, res) => {
     res.locals.reviews = await Review.find({ game: req.params.gameId })
       .populate("author", "username")
       .sort({ createdAt: -1 });
+
+    res.locals.myReview = await Review.findOne({
+      game: req.params.gameId,
+      author: req.session.user._id,
+    });
+
     res.render("games/show.ejs");
   } catch (error) {
     console.log(error);

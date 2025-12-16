@@ -27,6 +27,7 @@ const reviewSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+reviewSchema.index({ author: 1, game: 1 }, { unique: true });
 
 const Review = mongoose.model("Review", reviewSchema);
 

@@ -16,6 +16,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+// OTHER USERS GAMES PAGE
+// GET /games/all
+router.get("/all", async (req, res) => {
+  try {
+    res.locals.games = await Game.find({ owner: { $ne: req.session.user._id } })
+      .populate("owner", "username")
+      .sort({ createdAt: -1 });
+
+    res.render("games/all.ejs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 // NEW Game Page
 // GET /games/new
 router.get("/new", (req, res) => {
@@ -53,8 +68,16 @@ router.get("/:gameId/reviews/:reviewId/edit", async (req, res) => {
 router.put("/:gameId/reviews/:reviewId", async (req, res) => {
   try {
     await Review.updateOne(
-      { _id: req.params.reviewId, author: req.session.user._id, game: req.params.gameId },
-      { rating: req.body.rating, comment: req.body.comment, playedOn: req.body.playedOn }
+      {
+        _id: req.params.reviewId,
+        author: req.session.user._id,
+        game: req.params.gameId,
+      },
+      {
+        rating: req.body.rating,
+        comment: req.body.comment,
+        playedOn: req.body.playedOn,
+      }
     );
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {
@@ -92,8 +115,6 @@ router.post("/:gameId/reviews", async (req, res) => {
     res.redirect("/");
   }
 });
-
-
 
 // EDIT GAME PAGE
 // GET /games/:gameId/edit

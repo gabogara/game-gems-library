@@ -12,7 +12,8 @@
 
     <% if (!games || games.length === 0) { %>
     <p>No games yet.</p>
-    <% } else { %>
+    <% } else { %> <% const defaultCover =
+    "https://placehold.co/150x150?text=Game+Cover"; %>
     <ul>
       <% games.forEach(game => { %>
       <li>
@@ -40,14 +41,15 @@
         <% } %>
 
         <a href="/games/<%= game._id %>"><%= game.title %></a>
-        <% if (game.coverImageUrl) { %>
+
         <img
-          src="<%= game.coverImageUrl %>"
+          src="<%= game.coverImageUrl || defaultCover %>"
           alt="<%= game.title %>"
           width="150"
           height="150"
         />
-        <% } %> <% if (game.owner) { %> — by
+
+        <% if (game.owner) { %> — by
         <a href="/users/<%= game.owner._id %>"><%= game.owner.username %></a> <%
         } %>
       </li>

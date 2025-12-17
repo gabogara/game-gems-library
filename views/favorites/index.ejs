@@ -12,10 +12,17 @@
 
     <% if (!games || games.length === 0) { %>
     <p>No favorites yet.</p>
-    <% } else { %>
+    <% } else { %> <% const defaultCover =
+    "https://placehold.co/150x150?text=Cover"; %>
     <ul>
       <% games.forEach(game => { %>
       <li>
+        <img
+          src="<%= game.coverImageUrl || defaultCover %>"
+          alt="<%= game.title %>"
+          width="150"
+          height="150"
+        />
         <a href="/games/<%= game._id %>"><%= game.title %></a>
 
         <form

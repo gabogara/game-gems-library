@@ -33,7 +33,10 @@ const gameSchema = new mongoose.Schema(
     releaseYear: Number,
     reviewCount: { type: Number, default: 0 },
     description: String,
-    coverImageUrl: String,
+    coverImageUrl: {
+      type: String,
+      default: "https://placehold.co/250x350?text=Game+Cover",
+    },
     averageRating: {
       type: Number,
       min: 0,

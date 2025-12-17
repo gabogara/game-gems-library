@@ -13,6 +13,8 @@ const gamesController = require("./controllers/games.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const comunityGamers = require("./controllers/communityGamers.js");
+const favoritesController = require("./controllers/favorites.js");
+
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
@@ -42,6 +44,8 @@ app.use("/auth", authController);
 app.use(isSignedIn);
 app.use("/", comunityGamers);
 app.use("/games", gamesController);
+app.use("/favorites", favoritesController);
+
 // app.use("/reviews", reviewsController);
 
 app.listen(port, () => {

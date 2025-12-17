@@ -99,7 +99,6 @@ router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
 });
 
 // ADD FAVORITE
-// POST /games/:gameId/favorite
 router.post("/:gameId/favorite", async (req, res) => {
   try {
     await User.updateOne(
@@ -107,15 +106,14 @@ router.post("/:gameId/favorite", async (req, res) => {
       { $addToSet: { favorites: req.params.gameId } }
     );
 
-    res.redirect(`/games/${req.params.gameId}`);
+    return res.redirect(req.body.next || `/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);
-    res.redirect("/");
+    return res.redirect("/");
   }
 });
 
 // REMOVE FAVORITE
-// POST /games/:gameId/unfavorite
 router.post("/:gameId/unfavorite", async (req, res) => {
   try {
     await User.updateOne(
@@ -123,10 +121,10 @@ router.post("/:gameId/unfavorite", async (req, res) => {
       { $pull: { favorites: req.params.gameId } }
     );
 
-    res.redirect(`/games/${req.params.gameId}`);
+    return res.redirect(req.body.next || `/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);
-    res.redirect("/");
+    return res.redirect("/");
   }
 });
 

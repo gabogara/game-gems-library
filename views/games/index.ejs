@@ -17,6 +17,10 @@
     <ul>
       <% games.forEach(game => { %>
       <li>
+        <form action="/games/<%= game._id %>/favorite" method="POST">
+          <button type="submit">☆ Favorite</button>
+        </form>
+
         <a href="/games/<%= game._id %>"><%= game.title %></a>
         <a href="/games/<%= game._id %>/edit">Edit</a>
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= profileUser.username %>'s Profile</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar.ejs") %>
+
+    <h1><%= profileUser.username %>'s Profile</h1>
+
+    <% if (profileUser.bio) { %>
+      <p><strong>Bio:</strong> <%= profileUser.bio %></p>
+    <% } %>
+
+    <% if (profileUser.favoriteGenre) { %>
+      <p><strong>Favorite Genre:</strong> <%= profileUser.favoriteGenre %></p>
+    <% } %>
+
+    <hr />
+
+    <h2>Games Added</h2>
+    <% if (!games || games.length === 0) { %>
+      <p>No games added yet.</p>
+    <% } else { %>
+      <ul>
+        <% games.forEach(game => { %>
+          <li>
+            <a href="/games/<%= game._id %>"><%= game.title %></a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <hr />
+
+    <h2>Reviews Written</h2>
+    <% if (!reviews || reviews.length === 0) { %>
+      <p>No reviews written yet.</p>
+    <% } else { %>
+      <ul>
+        <% reviews.forEach(review => { %>
+          <li>
+            <strong><%= review.rating %>/5</strong>
+            — <%= review.comment %>
+            <% if (review.game) { %>
+              (on <a href="/games/<%= review.game._id %>"><%= review.game.title %></a>)
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </body>
+</html>

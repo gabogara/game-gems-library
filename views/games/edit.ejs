@@ -43,7 +43,17 @@
 
       <label>
         Platform:
-        <input type="text" name="platform" value="<%= game.platform || '' %>" />
+        <select name="platform">
+          <option value="" <%= !game.platform ? "selected" : "" %>>-- Select --</option>
+          <option value="PC" <%= game.platform === "PC" ? "selected" : "" %>>PC</option>
+          <option value="PS5" <%= game.platform === "PS5" ? "selected" : "" %>>PS5</option>
+          <option value="PS4" <%= game.platform === "PS4" ? "selected" : "" %>>PS4</option>
+          <option value="Xbox Series X|S" <%= game.platform === "Xbox Series X|S" ? "selected" : "" %>>Xbox Series X|S</option>
+          <option value="Xbox One" <%= game.platform === "Xbox One" ? "selected" : "" %>>Xbox One</option>
+          <option value="Switch" <%= game.platform === "Switch" ? "selected" : "" %>>Switch</option>
+          <option value="Mobile" <%= game.platform === "Mobile" ? "selected" : "" %>>Mobile</option>
+          <option value="Other" <%= game.platform === "Other" ? "selected" : "" %>>Other</option>
+        </select>
       </label>
 
       <label>

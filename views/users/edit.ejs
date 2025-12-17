@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar.ejs") %>
+
+    <h1>Edit Profile</h1>
+
+    <form action="/users/me?_method=PUT" method="POST">
+      <label>
+        Favorite Genre:
+        <input
+          type="text"
+          name="favoriteGenre"
+          value="<%= profileUser.favoriteGenre || '' %>"
+        />
+      </label>
+
+      <label>
+        Bio:
+        <textarea name="bio"><%= profileUser.bio || '' %></textarea>
+      </label>
+
+      <button type="submit">Save</button>
+    </form>
+
+    <p><a href="/users/<%= profileUser._id %>">Back to profile</a></p>
+  </body>
+</html>

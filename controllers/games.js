@@ -104,7 +104,7 @@ router.post("/:gameId/favorite", async (req, res) => {
   try {
     await User.updateOne(
       { _id: req.session.user._id },
-      { $addToSet: { favorites: req.params.gameId } } 
+      { $addToSet: { favorites: req.params.gameId } }
     );
 
     res.redirect(`/games/${req.params.gameId}`);
@@ -216,6 +216,13 @@ router.get("/:gameId", async (req, res) => {
       game: req.params.gameId,
       author: req.session.user._id,
     });
+
+    const user = await User.findById(req.session.user._id);
+
+    const favorites = user.favorites || [];
+    res.locals.isFavorite = favorites
+      .map(String)
+      .includes(String(req.params.gameId));
 
     res.render("games/show.ejs");
   } catch (error) {

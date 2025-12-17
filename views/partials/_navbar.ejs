@@ -2,8 +2,9 @@
   <a href="/">Home</a>
 
   <% if (currentUser) { %>
-  <a href="/games">My games</a>
   <a href="/games/all">All Games</a>
+  <a href="/games">My games</a>
+  <a href="/favorites">Favorites</a>
   <a href="/auth/sign-out">Sign out</a>
   <% } else { %>
   <a href="/auth/sign-in">Sign in</a>

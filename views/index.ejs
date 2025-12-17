@@ -16,6 +16,16 @@
     <ul>
       <% games.forEach(game => { %>
       <li>
+        <% const isFav = favoriteIds && favoriteIds.includes(String(game._id));
+        %> <% if (isFav) { %>
+        <form
+          action="/games/<%= game._id %>/unfavorite"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">⭐ Unfavorite</button>
+        </form>
+        <% } else { %>
         <form
           action="/games/<%= game._id %>/favorite"
           method="POST"
@@ -23,6 +33,7 @@
         >
           <button type="submit">☆ Favorite</button>
         </form>
+        <% } %>
 
         <a href="/games/<%= game._id %>"><%= game.title %></a>
         <% if (game.coverImageUrl) { %>

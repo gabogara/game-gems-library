@@ -9,7 +9,7 @@ const User = require("../models/user.js");
 router.get("/", async (req, res) => {
   try {
     res.locals.games = await Game.find({ owner: { $ne: req.session.user._id } })
-      .populate("owner", "username")
+      .populate("owner", "username _id")
       .sort({ createdAt: -1 });
 
     const user = await User.findById(req.session.user._id);

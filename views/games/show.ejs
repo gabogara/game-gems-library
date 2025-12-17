@@ -6,7 +6,8 @@
     <title><%= game.title %></title>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_navbar.ejs') %> <% const defaultCover =
+    "https://placehold.co/250x350?text=Game+Cover"; %>
 
     <h1><%= game.title %></h1>
 
@@ -36,17 +37,22 @@
     <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
     <% } %> <% if (game.description) { %>
     <p><strong>Description:</strong> <%= game.description %></p>
-    <% } %> <% if (game.coverImageUrl) { %>
-    <img src="<%= game.coverImageUrl %>" alt="<%= game.title %>" width="250" />
     <% } %>
+
+    <img
+      src="<%= game.coverImageUrl || defaultCover %>"
+      alt="<%= game.title %>"
+      width="150"
+      height="150"
+    />
 
     <h2>Reviews</h2>
 
     <% if (myReview) { %>
     <p>You already left a review for this game.</p>
-    <a href="/games/<%= game._id %>/reviews/<%= myReview._id %>/edit"
-      >Edit your review</a
-    >
+    <a href="/games/<%= game._id %>/reviews/<%= myReview._id %>/edit">
+      Edit your review
+    </a>
     <% } else { %>
     <h3>Leave a review</h3>
 
@@ -61,11 +67,6 @@
         <textarea name="comment" required></textarea>
       </label>
 
-      <label>
-        Played on:
-        <input type="date" name="playedOn" />
-      </label>
-
       <button type="submit">Add review</button>
     </form>
     <% } %> <% if (!reviews || reviews.length === 0) { %>
@@ -76,9 +77,16 @@
       <% reviews.forEach((review) => { %>
       <li>
         <strong><%= review.rating %>/5</strong>
-        — <%= review.comment %> <% if (review.author) { %> (by <%=
-        review.author.username %>) <% } %> <% if (currentUser && review.author
-        && String(review.author._id) === String(currentUser._id)) { %>
+        — <%= review.comment %>
+
+        <small>
+          Reviewed on <%= review.createdAt ? review.createdAt.toDateString() :
+          '' %>
+        </small>
+
+        <% if (review.author) { %> (by <%= review.author.username %>) <% } %> <%
+        if (currentUser && review.author && String(review.author._id) ===
+        String(currentUser._id)) { %>
         <form
           action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE"
           method="POST"

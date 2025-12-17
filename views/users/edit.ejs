@@ -13,11 +13,29 @@
     <form action="/users/me?_method=PUT" method="POST">
       <label>
         Favorite Genre:
-        <input
-          type="text"
-          name="favoriteGenre"
-          value="<%= profileUser.favoriteGenre || '' %>"
-        />
+        <select name="favoriteGenre">
+          <option value="" <%= !profileUser.favoriteGenre ? "selected" : "" %>>-- Select --</option>
+
+          <option value="Action" <%= profileUser.favoriteGenre === "Action" ? "selected" : "" %>>Action</option>
+          <option value="Adventure" <%= profileUser.favoriteGenre === "Adventure" ? "selected" : "" %>>Adventure</option>
+          <option value="Action-Adventure" <%= profileUser.favoriteGenre === "Action-Adventure" ? "selected" : "" %>>Action-Adventure</option>
+          <option value="RPG" <%= profileUser.favoriteGenre === "RPG" ? "selected" : "" %>>RPG</option>
+          <option value="JRPG" <%= profileUser.favoriteGenre === "JRPG" ? "selected" : "" %>>JRPG</option>
+          <option value="Strategy" <%= profileUser.favoriteGenre === "Strategy" ? "selected" : "" %>>Strategy</option>
+          <option value="Tactical" <%= profileUser.favoriteGenre === "Tactical" ? "selected" : "" %>>Tactical</option>
+          <option value="Shooter" <%= profileUser.favoriteGenre === "Shooter" ? "selected" : "" %>>Shooter</option>
+          <option value="Platformer" <%= profileUser.favoriteGenre === "Platformer" ? "selected" : "" %>>Platformer</option>
+          <option value="Puzzle" <%= profileUser.favoriteGenre === "Puzzle" ? "selected" : "" %>>Puzzle</option>
+          <option value="Fighting" <%= profileUser.favoriteGenre === "Fighting" ? "selected" : "" %>>Fighting</option>
+          <option value="Racing" <%= profileUser.favoriteGenre === "Racing" ? "selected" : "" %>>Racing</option>
+          <option value="Simulation" <%= profileUser.favoriteGenre === "Simulation" ? "selected" : "" %>>Simulation</option>
+          <option value="Sports" <%= profileUser.favoriteGenre === "Sports" ? "selected" : "" %>>Sports</option>
+          <option value="Horror" <%= profileUser.favoriteGenre === "Horror" ? "selected" : "" %>>Horror</option>
+          <option value="Metroidvania" <%= profileUser.favoriteGenre === "Metroidvania" ? "selected" : "" %>>Metroidvania</option>
+          <option value="Roguelike" <%= profileUser.favoriteGenre === "Roguelike" ? "selected" : "" %>>Roguelike</option>
+          <option value="Indie" <%= profileUser.favoriteGenre === "Indie" ? "selected" : "" %>>Indie</option>
+          <option value="Other" <%= profileUser.favoriteGenre === "Other" ? "selected" : "" %>>Other</option>
+        </select>
       </label>
 
       <label>

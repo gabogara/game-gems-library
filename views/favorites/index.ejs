@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Favorites</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar.ejs") %>
+
+    <h1>My Favorites</h1>
+
+    <% if (!games || games.length === 0) { %>
+    <p>No favorites yet.</p>
+    <% } else { %>
+    <ul>
+      <% games.forEach(game => { %>
+      <li>
+        <a href="/games/<%= game._id %>"><%= game.title %></a>
+
+        <form
+          action="/games/<%= game._id %>/unfavorite"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">★ Unfavorite</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </body>
+</html>

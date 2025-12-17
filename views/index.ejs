@@ -23,16 +23,20 @@
           method="POST"
           style="display: inline"
         >
+          <input type="hidden" name="next" value="/" />
           <button type="submit">⭐ Unfavorite</button>
         </form>
+
         <% } else { %>
         <form
           action="/games/<%= game._id %>/favorite"
           method="POST"
           style="display: inline"
         >
+          <input type="hidden" name="next" value="/" />
           <button type="submit">☆ Favorite</button>
         </form>
+
         <% } %>
 
         <a href="/games/<%= game._id %>"><%= game.title %></a>

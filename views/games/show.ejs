@@ -10,6 +10,24 @@
 
     <h1><%= game.title %></h1>
 
+    <% if (isFavorite) { %>
+    <form
+      action="/games/<%= game._id %>/unfavorite"
+      method="POST"
+      style="display: inline"
+    >
+      <button type="submit">★ Unfavorite</button>
+    </form>
+    <% } else { %>
+    <form
+      action="/games/<%= game._id %>/favorite"
+      method="POST"
+      style="display: inline"
+    >
+      <button type="submit">☆ Favorite</button>
+    </form>
+    <% } %>
+
     <p><strong>Genre:</strong> <%= game.genre %></p>
 
     <% if (game.platform) { %>
@@ -21,11 +39,17 @@
     <% } %> <% if (game.coverImageUrl) { %>
     <img src="<%= game.coverImageUrl %>" alt="<%= game.title %>" width="250" />
     <% } %>
+
     <h2>Reviews</h2>
+
     <% if (myReview) { %>
     <p>You already left a review for this game.</p>
+    <a href="/games/<%= game._id %>/reviews/<%= myReview._id %>/edit"
+      >Edit your review</a
+    >
     <% } else { %>
     <h3>Leave a review</h3>
+
     <form action="/games/<%= game._id %>/reviews" method="POST">
       <label>
         Rating (1-5):
@@ -47,6 +71,7 @@
     <% } %> <% if (!reviews || reviews.length === 0) { %>
     <p>No reviews yet.</p>
     <% } else { %>
+    <h3>Player reviews:</h3>
     <ul>
       <% reviews.forEach((review) => { %>
       <li>
@@ -61,11 +86,8 @@
         >
           <button type="submit">Delete</button>
         </form>
-
-        <a href="/games/<%= game._id %>/reviews/<%= review._id %>/edit">Edit</a>
         <% } %>
       </li>
-
       <% }) %>
     </ul>
     <% } %>

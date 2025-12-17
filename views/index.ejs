@@ -47,7 +47,9 @@
           width="150"
           height="150"
         />
-        <% } %> <% if (game.owner) { %> — by <%= game.owner.username %> <% } %>
+        <% } %> <% if (game.owner) { %> — by
+        <a href="/users/<%= game.owner._id %>"><%= game.owner.username %></a> <%
+        } %>
       </li>
       <% }) %>
     </ul>

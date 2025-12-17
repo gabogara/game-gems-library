@@ -16,6 +16,14 @@
     <ul>
       <% games.forEach(game => { %>
       <li>
+        <form
+          action="/games/<%= game._id %>/favorite"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">☆ Favorite</button>
+        </form>
+
         <a href="/games/<%= game._id %>"><%= game.title %></a>
         <% if (game.coverImageUrl) { %>
         <img

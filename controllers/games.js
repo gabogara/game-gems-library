@@ -10,6 +10,10 @@ const User = require("../models/user.js");
 router.get("/", async (req, res) => {
   try {
     res.locals.games = await Game.find({ owner: req.session.user._id });
+
+    const user = await User.findById(req.session.user._id);
+    res.locals.favoriteIds = (user.favorites || []).map(String);
+
     res.render("games/index.ejs");
   } catch (error) {
     console.log(error);

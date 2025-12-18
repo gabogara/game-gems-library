@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Edit Profile</title>
   </head>
   <body>
     <%- include("../partials/_navbar.ejs") %>
-
+  <main class="container">
     <h1>Edit Profile</h1>
 
     <form action="/users/me?_method=PUT" method="POST">
@@ -38,14 +39,16 @@
         </select>
       </label>
 
-      <label>
+      <label class="page-form">
         Bio:
         <textarea name="bio"><%= profileUser.bio || '' %></textarea>
       </label>
 
       <button type="submit">Save</button>
     </form>
-
-    <p><a href="/users/<%= profileUser._id %>">Back to profile</a></p>
+    <div class="form-actions">
+      <a class="btn" href="/users/<%= profileUser._id %>">Back to profile</a>
+    </div>
+    </main>
   </body>
 </html>

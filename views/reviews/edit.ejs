@@ -14,12 +14,13 @@
       method="POST"
     >
       <label>
-        Rating (1-5):
+        Rating (0-5):
         <input
           type="number"
           name="rating"
-          min="1"
+          min="0"
           max="5"
+          step="0.1"
           required
           value="<%= review.rating %>"
         />
@@ -28,15 +29,6 @@
       <label>
         Comment:
         <textarea name="comment" required><%= review.comment %></textarea>
-      </label>
-
-      <label>
-        Played on:
-        <input
-          type="date"
-          name="playedOn"
-          value="<%= review.playedOn ? new Date(review.playedOn).toISOString().slice(0,10) : '' %>"
-        />
       </label>
 
       <button type="submit">Update Review</button>

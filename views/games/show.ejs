@@ -3,116 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title><%= game.title %></title>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %> <% const defaultCover =
-    "https://placehold.co/250x350?text=Game+Cover"; %>
+    <%- include("../partials/_navbar.ejs") %>
 
-    <h1><%= game.title %></h1>
-    <% if ((game.reviewCount || 0) === 0) { %>
-    <p><strong>Rating:</strong> Unrated</p>
-    <% } else { %>
-    <p>
-      <strong>Avg:</strong> <%= Number(game.averageRating).toFixed(1) %>/5 (<%=
-      game.reviewCount %> reviews)
-    </p>
-    <% } %> <% if (isFavorite) { %>
-    <form
-      action="/games/<%= game._id %>/unfavorite"
-      method="POST"
-      style="display: inline"
-    >
-      <button type="submit">★ Unfavorite</button>
-    </form>
-    <% } else { %>
-    <form
-      action="/games/<%= game._id %>/favorite"
-      method="POST"
-      style="display: inline"
-    >
-      <button type="submit">☆ Favorite</button>
-    </form>
-    <% } %>
+    <main class="container">
+       <section class="panel">
+      <% const defaultCover = "https://placehold.co/250x350?text=Game+Cover"; %>
 
-    <p><strong>Genre:</strong> <%= game.genre %></p>
+      <h1><%= game.title %></h1>
 
-    <% if (game.platform) { %>
-    <p><strong>Platform:</strong> <%= game.platform %></p>
-    <% } %> <% if (game.releaseYear) { %>
-    <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
-    <% } %> <% if (game.description) { %>
-    <p><strong>Description:</strong> <%= game.description %></p>
-    <% } %>
-
-    <img
-      src="<%= game.coverImageUrl || defaultCover %>"
-      alt="<%= game.title %>"
-      width="150"
-      height="150"
-    />
-
-    <h2>Reviews</h2>
-
-    <% if (myReview) { %>
-    <p>You already left a review for this game.</p>
-    <a href="/games/<%= game._id %>/reviews/<%= myReview._id %>/edit">
-      Edit your review
-    </a>
-    <% } else { %>
-    <h3>Leave a review</h3>
-
-    <form action="/games/<%= game._id %>/reviews" method="POST">
-      <label>
-        Rating (1-5):
-        <input
-          type="number"
-          name="rating"
-          min="0"
-          max="5"
-          step="0.1"
-          required
-        />
-      </label>
-
-      <label>
-        Comment:
-        <textarea name="comment" required></textarea>
-      </label>
-
-      <button type="submit">Add review</button>
-    </form>
-    <% } %> <% if (!reviews || reviews.length === 0) { %>
-    <p>No reviews yet.</p>
-    <% } else { %>
-    <h3>Player reviews:</h3>
-    <ul>
-      <% reviews.forEach((review) => { %>
-      <li>
-        <strong><%= review.rating %>/5</strong>
-        — <%= review.comment %>
-
-        <small>
-          Reviewed on <%= review.createdAt ? review.createdAt.toDateString() :
-          '' %>
-        </small>
-
-        <% if (review.author) { %> (by <%= review.author.username %>) <% } %> <%
-        if (currentUser && review.author && String(review.author._id) ===
-        String(currentUser._id)) { %>
-        <form
-          action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE"
-          method="POST"
-          style="display: inline"
-        >
-          <button type="submit">Delete</button>
-        </form>
+      <p>
+        <% if ((game.reviewCount || 0) === 0) { %>
+          <strong>Rating:</strong> Unrated
+        <% } else { %>
+          <strong>Avg:</strong> <%= Number(game.averageRating).toFixed(1) %>/5
+          (<%= game.reviewCount %> reviews)
         <% } %>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+      </p>
 
-    <p><a href="/games">Back to My Games</a></p>
+      <div class="top-actions">
+        <% if (isFavorite) { %>
+          <form class="inline-form" action="/games/<%= game._id %>/unfavorite" method="POST">
+            <button type="submit">★ Unfavorite</button>
+          </form>
+        <% } else { %>
+          <form class="inline-form" action="/games/<%= game._id %>/favorite" method="POST">
+            <button type="submit">☆ Favorite</button>
+          </form>
+        <% } %>
+
+        <a class="btn" href="/games">Back</a>
+      </div>
+
+      <img
+        class="cover"
+        src="<%= game.coverImageUrl || defaultCover %>"
+        alt="<%= game.title %>"
+      />
+
+      <p><strong>Genre:</strong> <%= game.genre %></p>
+
+      <% if (game.platform) { %>
+        <p><strong>Platform:</strong> <%= game.platform %></p>
+      <% } %>
+
+      <% if (game.releaseYear) { %>
+        <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
+      <% } %>
+
+      <% if (game.description) { %>
+        <p><strong>Description:</strong> <%= game.description %></p>
+      <% } %>
+
+      <h2>Reviews</h2>
+
+      <% if (myReview) { %>
+        <section class="empty-state">
+          <p class="empty-text">You already left a review for this game.</p>
+          <a class="btn btn-primary" href="/games/<%= game._id %>/reviews/<%= myReview._id %>/edit">
+            Edit your review
+          </a>
+        </section>
+      <% } else { %>
+        <h3>Leave a review</h3>
+
+        <form action="/games/<%= game._id %>/reviews" method="POST">
+          <label>
+            Rating (1-5):
+            <input type="number" name="rating" min="1" max="5" step="0.1" required />
+          </label>
+
+          <label>
+            Comment:
+            <textarea name="comment" required></textarea>
+          </label>
+
+          <button type="submit">Add review</button>
+        </form>
+      <% } %>
+
+      <% if (!reviews || reviews.length === 0) { %>
+        <p>No reviews yet.</p>
+      <% } else { %>
+        <h3>Player reviews</h3>
+
+        <ul>
+          <% reviews.forEach((review) => { %>
+            <li>
+              <p><strong><%= review.rating %>/5</strong> — <%= review.comment %></p>
+
+              <p>
+                <small>
+                  Reviewed on <%= review.createdAt ? review.createdAt.toDateString() : "" %>
+                  <% if (review.author) { %> (by <%= review.author.username %>) <% } %>
+                </small>
+              </p>
+
+              <% if (currentUser && review.author && String(review.author._id) === String(currentUser._id)) { %>
+                <form class="inline-form" action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                  <button type="submit">Delete</button>
+                </form>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+      </section>
+    </main>
   </body>
 </html>

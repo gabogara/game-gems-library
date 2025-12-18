@@ -304,6 +304,29 @@ button {
   gap: 10px;
 }
 
+.inline-form {
+  display: inline;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cover {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.panel {
+  background: rgba(5, 8, 18, 0.55);
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+  padding: 18px;
+  margin-top: 16px;
+}
+
 @media (max-width: 768px) {
   .game-card {
     flex-direction: column;

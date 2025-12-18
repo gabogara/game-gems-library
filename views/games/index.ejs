@@ -3,71 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>My Games</title>
   </head>
   <body>
     <%- include("../partials/_navbar.ejs") %>
+<main class="container">
+  <h1>My Games</h1>
 
-    <p><a href="/games/new">Add new game</a></p>
+  <%- include('../partials/_gameFilters.ejs', { action: '/games', resetUrl: '/games', filters }) %>
 
-    <h1>My Games</h1>
-    <%- include('../partials/_gameFilters.ejs', { action: '/games', resetUrl: '/games', filters }) %>
+  <% if (!games || games.length === 0) { %>
+    <section class="empty-state">
+      <p class="empty-text">No games yet.</p>
+      <a class="btn btn-primary" href="/games/new">+ Add new game</a>
+    </section>
+  <% } else { %>
 
-    <% if (!games || games.length === 0) { %>
-    <p>No games yet.</p>
-    <% } else { %> <% const defaultCover =
-    "https://placehold.co/150x150?text=Game+Cover"; %>
-    <ul>
+    <% const defaultCover = "https://placehold.co/150x150?text=Game+Cover"; %>
+
+    <div class="games-list">
       <% games.forEach((game) => { %>
-      <li>
-        <% const isFav = favoriteIds && favoriteIds.includes(String(game._id));
-        %> <% if (isFav) { %>
-        <form
-          action="/games/<%= game._id %>/unfavorite"
-          method="POST"
-          style="display: inline"
-        >
-          <input type="hidden" name="next" value="/games" />
-          <button type="submit">★ Unfavorite</button>
-        </form>
-        <% } else { %>
-        <form
-          action="/games/<%= game._id %>/favorite"
-          method="POST"
-          style="display: inline"
-        >
-          <input type="hidden" name="next" value="/games" />
-          <button type="submit">☆ Favorite</button>
-        </form>
-        <% } %>
-        <img
-          src="<%= game.coverImageUrl || defaultCover %>"
-          alt="<%= game.title %>"
-          width="150"
-          height="150"
-        />
-        <a href="/games/<%= game._id %>"><%= game.title %></a>
-        <% if ((game.reviewCount || 0) === 0) { %>
-        <p><strong>Rating:</strong> Unrated</p>
-        <% } else { %>
-        <p>
-          <strong>Avg:</strong> <%= Number(game.averageRating || 0).toFixed(1)
-          %>/5 (<%= game.reviewCount %> reviews)
-        </p>
-        <% } %>
+        <% const isFav = favoriteIds && favoriteIds.includes(String(game._id)); %>
 
-        <a href="/games/<%= game._id %>/edit">Edit</a>
+        <article class="game-card">
+          <!-- Cover -->
+          <a class="game-card__cover" href="/games/<%= game._id %>">
+            <img
+              src="<%= game.coverImageUrl || defaultCover %>"
+              alt="<%= game.title %>"
+              width="150"
+              height="150"
+            />
+          </a>
 
-        <form
-          action="/games/<%= game._id %>?_method=DELETE"
-          method="POST"
-          style="display: inline"
-        >
-          <button type="submit">Delete</button>
-        </form>
-      </li>
+          <!-- Info -->
+          <div class="game-card__info">
+            <a class="game-card__title" href="/games/<%= game._id %>">
+              <%= game.title %>
+            </a>
+
+            <% if ((game.reviewCount || 0) === 0) { %>
+              <p class="game-card__rating"><strong>Rating:</strong> Unrated</p>
+            <% } else { %>
+              <p class="game-card__rating">
+                <strong>Avg:</strong> <%= Number(game.averageRating || 0).toFixed(1) %>/5
+                (<%= game.reviewCount %> reviews)
+              </p>
+            <% } %>
+
+            <p class="game-card__meta">
+              <%= game.genre %><% if (game.platform) { %> • <%= game.platform %><% } %>
+            </p>
+          </div>
+
+          <!-- Actions -->
+          <div class="game-card__actions">
+            <% if (isFav) { %>
+              <form action="/games/<%= game._id %>/unfavorite" method="POST">
+                <input type="hidden" name="next" value="/games" />
+                <button class="btn btn-fav" type="submit">★ Unfavorite</button>
+              </form>
+            <% } else { %>
+              <form action="/games/<%= game._id %>/favorite" method="POST">
+                <input type="hidden" name="next" value="/games" />
+                <button class="btn btn-fav" type="submit">☆ Favorite</button>
+              </form>
+            <% } %>
+
+            <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
+
+            <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
       <% }) %>
-    </ul>
-    <% } %>
+    </div>
+
+  <% } %>
+</main>
   </body>
 </html>

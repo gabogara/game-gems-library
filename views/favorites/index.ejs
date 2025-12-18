@@ -3,39 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>My Favorites</title>
   </head>
   <body>
     <%- include("../partials/_navbar.ejs") %>
 
-    <h1>My Favorites</h1>
+    <main class="container">
+      <h1>My Favorites</h1>
 
-    <% if (!games || games.length === 0) { %>
-    <p>No favorites yet.</p>
-    <% } else { %> <% const defaultCover =
-    "https://placehold.co/150x150?text=Cover"; %>
-    <ul>
-      <% games.forEach(game => { %>
-      <li>
-        <img
-          src="<%= game.coverImageUrl || defaultCover %>"
-          alt="<%= game.title %>"
-          width="150"
-          height="150"
-        />
-        <a href="/games/<%= game._id %>"><%= game.title %></a>
+      <% if (!games || games.length === 0) { %>
+        <section class="empty-state">
+          <p class="empty-text">No favorites yet.</p>
+          <a class="btn" href="/games">Browse games</a>
+        </section>
+      <% } else { %>
+        <% const defaultCover = "https://placehold.co/150x150?text=Cover"; %>
 
-        <form
-          action="/games/<%= game._id %>/unfavorite"
-          method="POST"
-          style="display: inline"
-        >
-          <input type="hidden" name="next" value="/favorites" />
-          <button type="submit">⭐ Unfavorite</button>
-        </form>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+        <ul>
+          <% games.forEach(game => { %>
+            <li>
+              <img
+                src="<%= game.coverImageUrl || defaultCover %>"
+                alt="<%= game.title %>"
+              />
+
+              <a href="/games/<%= game._id %>"><%= game.title %></a>
+
+              <form action="/games/<%= game._id %>/unfavorite" method="POST">
+                <input type="hidden" name="next" value="/favorites" />
+                <button type="submit">⭐ Unfavorite</button>
+              </form>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </main>
   </body>
 </html>

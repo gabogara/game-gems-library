@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/style.css" />
     <title>Edit <%= game.title %></title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
     <h1>Edit Game</h1>
-
+    <main class="container">
     <form action="/games/<%= game._id %>?_method=PUT" method="POST">
       <label>
         Title:
@@ -73,7 +74,9 @@
 
       <button type="submit">Update Game</button>
     </form>
-
-    <p><a href="/games">Cancel</a></p>
+    <div class="form-actions">
+      <a class="btn" href="/games">Cancel</a>
+    </div>
+    </main>
   </body>
 </html>

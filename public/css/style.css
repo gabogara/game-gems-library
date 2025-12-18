@@ -298,6 +298,12 @@ button {
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
 }
 
+.form-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
 @media (max-width: 768px) {
   .game-card {
     flex-direction: column;

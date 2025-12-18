@@ -11,6 +11,7 @@
     <p><a href="/games/new">Add new game</a></p>
 
     <h1>My Games</h1>
+    <%- include('../partials/_gameFilters.ejs', { action: '/games', resetUrl: '/games', filters }) %>
 
     <% if (!games || games.length === 0) { %>
     <p>No games yet.</p>

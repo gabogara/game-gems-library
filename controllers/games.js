@@ -4,6 +4,7 @@ const router = express.Router();
 const Game = require("../models/game.js");
 const Review = require("../models/review.js");
 const User = require("../models/user.js");
+const recalcGameStats = require("../helpers/recalc-game-stats.js");
 
 // INDEX PAGE
 // GET /games

@@ -1,0 +1,48 @@
+<form method="GET" action="<%= action %>">
+  <label>
+    Title:
+    <input type="text" name="q" value="<%= filters?.q || '' %>" />
+  </label>
+
+  <label>
+    Genre:
+    <select name="genre">
+      <option value="" <%= !filters?.genre ? "selected" : "" %>>All</option>
+      <option value="Action" <%= filters?.genre === "Action" ? "selected" : "" %>>Action</option>
+      <option value="Adventure" <%= filters?.genre === "Adventure" ? "selected" : "" %>>Adventure</option>
+      <option value="Action-Adventure" <%= filters?.genre === "Action-Adventure" ? "selected" : "" %>>Action-Adventure</option>
+      <option value="RPG" <%= filters?.genre === "RPG" ? "selected" : "" %>>RPG</option>
+      <option value="JRPG" <%= filters?.genre === "JRPG" ? "selected" : "" %>>JRPG</option>
+      <option value="Strategy" <%= filters?.genre === "Strategy" ? "selected" : "" %>>Strategy</option>
+      <option value="Tactical" <%= filters?.genre === "Tactical" ? "selected" : "" %>>Tactical</option>
+      <option value="Shooter" <%= filters?.genre === "Shooter" ? "selected" : "" %>>Shooter</option>
+      <option value="Platformer" <%= filters?.genre === "Platformer" ? "selected" : "" %>>Platformer</option>
+      <option value="Puzzle" <%= filters?.genre === "Puzzle" ? "selected" : "" %>>Puzzle</option>
+      <option value="Fighting" <%= filters?.genre === "Fighting" ? "selected" : "" %>>Fighting</option>
+      <option value="Racing" <%= filters?.genre === "Racing" ? "selected" : "" %>>Racing</option>
+      <option value="Simulation" <%= filters?.genre === "Simulation" ? "selected" : "" %>>Simulation</option>
+      <option value="Sports" <%= filters?.genre === "Sports" ? "selected" : "" %>>Sports</option>
+      <option value="Horror" <%= filters?.genre === "Horror" ? "selected" : "" %>>Horror</option>
+      <option value="Metroidvania" <%= filters?.genre === "Metroidvania" ? "selected" : "" %>>Metroidvania</option>
+      <option value="Roguelike" <%= filters?.genre === "Roguelike" ? "selected" : "" %>>Roguelike</option>
+      <option value="Indie" <%= filters?.genre === "Indie" ? "selected" : "" %>>Indie</option>
+      <option value="Other" <%= filters?.genre === "Other" ? "selected" : "" %>>Other</option>
+    </select>
+  </label>
+
+  <label>
+    Platform:
+    <input type="text" name="platform" value="<%= filters?.platform || '' %>" />
+  </label>
+
+  <label>
+    Sort:
+    <select name="sort">
+      <option value="" <%= !filters?.sort ? "selected" : "" %>>Default</option>
+      <option value="rating" <%= filters?.sort === "rating" ? "selected" : "" %>>Highest rating</option>
+    </select>
+  </label>
+
+  <button type="submit">Apply</button>
+  <a href="<%= resetUrl %>">Reset</a>
+</form>

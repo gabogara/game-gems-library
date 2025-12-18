@@ -77,9 +77,9 @@ router.put("/:gameId/reviews/:reviewId", async (req, res) => {
       {
         rating: req.body.rating,
         comment: req.body.comment,
-        playedOn: req.body.playedOn,
       }
     );
+    await recalcGameStats(req.params.gameId);
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);

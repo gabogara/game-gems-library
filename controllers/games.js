@@ -150,6 +150,8 @@ router.post("/:gameId/reviews", async (req, res) => {
     req.body.game = req.params.gameId;
 
     await Review.create(req.body);
+    await recalcGameStats(req.params.gameId);
+
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);

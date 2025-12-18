@@ -28,6 +28,7 @@ mongoose.connection.on("connected", () => {
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
 

@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "VT323", monospace;
+  font-size: 22px;
+  background: #0a0e27;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.container {
+  width: 70%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 40px;
+}

@@ -27,17 +27,14 @@
         <% const isFav = favoriteIds && favoriteIds.includes(String(game._id)); %>
 
         <article class="game-card">
-          <!-- Cover -->
           <a class="game-card__cover" href="/games/<%= game._id %>">
             <img
+              class="game-cover"
               src="<%= game.coverImageUrl || defaultCover %>"
               alt="<%= game.title %>"
-              width="150"
-              height="150"
             />
           </a>
 
-          <!-- Info -->
           <div class="game-card__info">
             <a class="game-card__title" href="/games/<%= game._id %>">
               <%= game.title %>
@@ -57,7 +54,6 @@
             </p>
           </div>
 
-          <!-- Actions -->
           <div class="game-card__actions">
             <% if (isFav) { %>
               <form action="/games/<%= game._id %>/unfavorite" method="POST">

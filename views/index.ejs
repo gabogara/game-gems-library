@@ -41,6 +41,14 @@
         <% } %>
 
         <a href="/games/<%= game._id %>"><%= game.title %></a>
+        <% if ((game.reviewCount || 0) === 0) { %>
+        <p><strong>Rating:</strong> Unrated</p>
+        <% } else { %>
+        <p>
+          <strong>Avg:</strong> <%= Number(game.averageRating || 0).toFixed(1)
+          %>/5 (<%= game.reviewCount %> reviews)
+        </p>
+        <% } %>
 
         <img
           src="<%= game.coverImageUrl || defaultCover %>"

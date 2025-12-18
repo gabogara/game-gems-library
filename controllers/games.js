@@ -96,6 +96,7 @@ router.delete("/:gameId/reviews/:reviewId", async (req, res) => {
       author: req.session.user._id,
       game: req.params.gameId,
     });
+    await recalcGameStats(req.params.gameId);
     res.redirect(`/games/${req.params.gameId}`);
   } catch (error) {
     console.log(error);

@@ -6,16 +6,64 @@ const Review = require("../models/review.js");
 const User = require("../models/user.js");
 const recalcGameStats = require("../helpers/recalc-game-stats.js");
 
-// INDEX PAGE
+// MY GAMES PAGE
 // GET /games
 router.get("/", async (req, res) => {
   try {
-    res.locals.games = await Game.find({ owner: req.session.user._id });
+    const q = req.query.q;
+    const genre = req.query.genre;
+    const platform = req.query.platform;
+    const sort = req.query.sort;
+
+    const filter = {
+      owner: req.session.user._id,
+    };
+
+    if (q && q.trim() !== "") {
+      filter.title = { $regex: q, $options: "i" };
+    }
+
+    if (genre && genre.trim() !== "") {
+      filter.genre = genre;
+    }
+
+    if (platform && platform.trim() !== "") {
+      filter.platform = { $regex: platform, $options: "i" };
+    }
+
+    let sortObj = { createdAt: -1 };
+
+    if (sort === "rating") {
+      sortObj = {
+        averageRating: -1,
+        reviewCount: -1,
+        createdAt: -1,
+      };
+    }
+
+    const games = await Game.find(filter).sort(sortObj);
 
     const user = await User.findById(req.session.user._id);
-    res.locals.favoriteIds = (user.favorites || []).map(String);
+    let favoriteIds;
+    if (user && user.favorites) {
+      favoriteIds = user.favorites.map((id) => String(id));
+    } else {
+      favoriteIds = [];
+    }
 
-    res.render("games/index.ejs");
+    const filters = {
+      q: q || "",
+      genre: genre || "",
+      platform: platform || "",
+      sort: sort || "",
+    };
+
+    res.render("games/index.ejs", {
+      games: games,
+      favoriteIds: favoriteIds,
+      filters: filters,
+      currentPath: req.originalUrl,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");

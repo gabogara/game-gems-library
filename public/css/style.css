@@ -327,6 +327,31 @@ button {
   margin-top: 16px;
 }
 
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.page-form label {
+  display: block;
+  width: 100%;
+}
+
+.page-form input,
+.page-form select,
+.page-form textarea {
+  width: 100%;
+}
+
+.page-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.page-form input[type="number"] {
+  max-width: 120px;
+}
+
 @media (max-width: 768px) {
   .game-card {
     flex-direction: column;

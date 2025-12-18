@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
 
 * {
@@ -20,3 +21,156 @@ body {
   margin: 0 auto;
   padding: 20px 0 40px;
 }
+
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(5, 8, 18, 0.9);
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  color: #00f0ff;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Press Start 2P", cursive;
+  margin: 18px 0;
+  text-align: center;
+}
+h1 {
+  color: #00f0ff;
+}
+h2 {
+  color: #ff00ff;
+}
+h3 {
+  color: #ffff00;
+}
+
+p {
+  margin: 10px 0;
+  color: #b8c5db;
+}
+strong {
+  color: #ffff00;
+}
+
+a {
+  color: #00f0ff;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin-top: 12px;
+}
+
+li {
+  background: #1a1f3a;
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+  padding: 14px;
+  margin: 12px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+form {
+  background: #1a1f3a;
+  border: 2px solid rgba(255, 0, 255, 0.25);
+  box-shadow: 0 0 14px rgba(255, 0, 255, 0.15);
+  padding: 16px;
+  margin: 16px 0;
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  color: #00f0ff;
+}
+
+input,
+textarea,
+select {
+  font-family: "VT323", monospace;
+  font-size: 20px;
+  padding: 10px;
+  background: rgba(5, 8, 18, 0.9);
+  color: #fff;
+  border: 2px solid rgba(0, 240, 255, 0.35);
+}
+
+button {
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  padding: 10px 14px;
+  background: transparent;
+  color: #00f0ff;
+  border: 2px solid #00f0ff;
+  cursor: pointer;
+}
+
+.game-filters {
+  width: 100%;
+  margin: 16px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  
+  background: #1a1f3a;
+  border: 2px solid rgba(255, 0, 255, 0.25);
+  box-shadow: 0 0 14px rgba(255, 0, 255, 0.15);
+  padding: 14px;
+}
+
+.game-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.game-filters input,
+.game-filters select {
+  width: 100%;
+}
+
+.game-filters button {
+  margin-left: auto;
+}
+
+.game-filters a {
+  margin-left: 10px;
+  align-self: center;
+}
+
+
+

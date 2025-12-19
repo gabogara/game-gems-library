@@ -20,23 +20,42 @@
       <% } else { %>
         <% const defaultCover = "https://placehold.co/150x150?text=Cover"; %>
 
-        <ul>
+        
           <% games.forEach(game => { %>
-            <li>
-              <img
-                src="<%= game.coverImageUrl || defaultCover %>"
-                alt="<%= game.title %>"
-              />
+            <div class="favorite-container">
+              <div class="info-container">
+                <div>
+                  <img
+                    src="<%= game.coverImageUrl || defaultCover %>"
+                    alt="<%= game.title %>"
+                  />
+                </div> 
+                <div>
+                  <p><strong>Genre:</strong> <%= game.genre %></p>
+            
+                  <% if (game.platform) { %>
+                    <p><strong>Platform:</strong> <%= game.platform %></p>
+                  <% } %>
+            
+                  <% if (game.releaseYear) { %>
+                    <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
+                  <% } %>
+            
+                  <% if (game.description) { %>
+                    <p><strong>Description:</strong> <%= game.description %></p>
+                  <% } %>
+                
+                  <a href="/games/<%= game._id %>"><%= game.title %></a>
 
-              <a href="/games/<%= game._id %>"><%= game.title %></a>
-
+                </div>
+              </div>
               <form action="/games/<%= game._id %>/unfavorite" method="POST">
                 <input type="hidden" name="next" value="/favorites" />
                 <button type="submit">⭐ Unfavorite</button>
               </form>
-            </li>
+            </div>
           <% }) %>
-        </ul>
+      
       <% } %>
     </main>
   </body>

@@ -363,7 +363,7 @@ ul {
   margin-top: 12px;
 }
 
-li {
+li, .favorite-container {
   background: #1a1f3a;
   border: 2px solid rgba(0, 240, 255, 0.35);
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
@@ -374,6 +374,8 @@ li {
   display: flex;
   gap: 20px;
 }
+
+
 @media (max-width: 768px) {
   .container {
     width: 95%;

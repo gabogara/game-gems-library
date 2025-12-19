@@ -57,20 +57,23 @@
         </select>
       </label>
 
-      <label>
+      <label for="releaseYear">
         Release Year:
+      </label>
         <input type="number" name="releaseYear" value="<%= game.releaseYear || '' %>" />
-      </label>
+      
 
-      <label class="page-form">
+      <label for="description" class="page-form">
         Description:
+      </label>
         <textarea name="description"><%= game.description || '' %></textarea>
-      </label>
+      
 
-      <label>
+      <label for="coverImageUrl">
         Cover Image URL:
-        <input type="text" name="coverImageUrl" value="<%= game.coverImageUrl || '' %>" />
       </label>
+        <input type="text" name="coverImageUrl" value="<%= game.coverImageUrl || '' %>" />
+      
 
       <button type="submit">Update Game</button>
     </form>

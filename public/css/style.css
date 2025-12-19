@@ -370,7 +370,10 @@ li {
   padding: 14px;
   margin: 12px 0;
 }
-
+.info-container {
+  display: flex;
+  gap: 20px;
+}
 @media (max-width: 768px) {
   .container {
     width: 95%;

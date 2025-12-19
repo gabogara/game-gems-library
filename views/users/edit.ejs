@@ -39,10 +39,11 @@
         </select>
       </label>
 
-      <label class="page-form">
+      <label for="bio">
         Bio:
-        <textarea name="bio"><%= profileUser.bio || '' %></textarea>
       </label>
+        <textarea name="bio"><%= profileUser.bio || '' %></textarea>
+      
 
       <button type="submit">Save</button>
     </form>

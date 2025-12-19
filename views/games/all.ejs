@@ -20,68 +20,65 @@
           <p class="empty-text">No games yet.</p>
         </section>
       <% } else { %>
+
         <% const defaultCover = "https://placehold.co/150x150?text=Game+Cover"; %>
 
-        <ul>
+        <div class="games-list">
           <% games.forEach((game) => { %>
-            <li>
-              <div>
-                <% const isFav = favoriteIds && favoriteIds.includes(String(game._id)); %>
+            <% const isFav = favoriteIds && favoriteIds.includes(String(game._id)); %>
 
-                <% if (isFav) { %>
-                  <form
-                    action="/games/<%= game._id %>/unfavorite"
-                    method="POST"
-                    style="display: inline"
-                  >
-                    <input type="hidden" name="next" value="/" />
-                    <button type="submit" class="btn">⭐ Unfavorite</button>
-                  </form>
-                <% } else { %>
-                  <form
-                    action="/games/<%= game._id %>/favorite"
-                    method="POST"
-                    style="display: inline"
-                  >
-                    <input type="hidden" name="next" value="/" />
-                    <button type="submit" class="btn">☆ Favorite</button>
-                  </form>
-                <% } %>
-              </div>
-
-              <div>
+            <article class="game-card">
+              <a class="game-card__cover" href="/games/<%= game._id %>">
                 <img
                   class="game-cover"
                   src="<%= game.coverImageUrl || defaultCover %>"
                   alt="<%= game.title %>"
                 />
-              </div>
+              </a>
 
-              <div>
-                <p>
-                  <a href="/games/<%= game._id %>"><%= game.title %></a>
-                </p>
+              <div class="game-card__info">
+                <a class="game-card__title" href="/games/<%= game._id %>">
+                  <%= game.title %>
+                </a>
 
                 <% if ((game.reviewCount || 0) === 0) { %>
-                  <p><strong>Rating:</strong> Unrated</p>
+                  <p class="game-card__rating"><strong>Rating:</strong> Unrated</p>
                 <% } else { %>
-                  <p>
-                    <strong>Avg:</strong>
-                    <%= Number(game.averageRating || 0).toFixed(1) %>/5
+                  <p class="game-card__rating">
+                    <strong>Avg:</strong> <%= Number(game.averageRating || 0).toFixed(1) %>/5
                     (<%= game.reviewCount %> reviews)
                   </p>
                 <% } %>
 
+                <p class="game-card__meta">
+                  <%= game.genre %><% if (game.platform) { %> • <%= game.platform %><% } %>
+                </p>
+
                 <% if (game.owner) { %>
-                  <p>
+                  <p class="game-card__meta">
                     — by
                     <a href="/users/<%= game.owner._id %>"><%= game.owner.username %></a>
                   </p>
                 <% } %>
               </div>
-            </li>
+
+              <div class="game-card__actions">
+                <% if (isFav) { %>
+                  <form action="/games/<%= game._id %>/unfavorite" method="POST">
+                    <input type="hidden" name="next" value="/games/all" />
+                    <button class="btn btn-fav" type="submit">★ Unfavorite</button>
+                  </form>
+                <% } else { %>
+                  <form action="/games/<%= game._id %>/favorite" method="POST">
+                    <input type="hidden" name="next" value="/games/all" />
+                    <button class="btn btn-fav" type="submit">☆ Favorite</button>
+                  </form>
+                <% } %>
+              </div>
+            </article>
           <% }) %>
-        </ul>
+        </div>
+
       <% } %>
     </main>
   </body>

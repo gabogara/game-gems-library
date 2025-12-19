@@ -9,7 +9,6 @@ const session = require("express-session");
 
 const authController = require("./controllers/auth.js");
 const gamesController = require("./controllers/games.js");
-// const reviewsController = require("./controllers/reviews.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const favoritesController = require("./controllers/favorites.js");
@@ -49,8 +48,6 @@ app.use(isSignedIn);
 app.use("/games", gamesController);
 app.use("/favorites", favoritesController);
 app.use("/users", usersController);
-
-// app.use("/reviews", reviewsController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

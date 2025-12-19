@@ -1,12 +1,13 @@
 <nav class="navbar">
   <% if (currentUser) { %>
   <a href="/">Home</a>
-  <a href="/games">My games</a>
+   <a href="/games/all">Community Games</a>
+  <a href="/games">My Games</a>
   <a href="/favorites">Favorites</a>
-  <a href="/users/<%= currentUser._id %>">My profile</a>
-  <a href="/auth/sign-out">Sign out</a>
+  <a href="/users/<%= currentUser._id %>">My Profile</a>
+  <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
-  <a href="/auth/sign-in">Sign in</a>
-  <a href="/auth/sign-up">Sign up</a>
+  <a href="/auth/sign-in">Sign In</a>
+  <a href="/auth/sign-up">Sign Up</a>
   <% } %>
 </nav>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Game Gems Library</title>
+  </head>
+
+  <body>
+    <%- include("../partials/_navbar.ejs") %>
+
+    <main class="container">
+      <h1>Games by other users</h1>
+
+      <%- include("../partials/_gameFilters.ejs", { action: "/", resetUrl: "/", filters }) %>
+
+      <% if (!games || games.length === 0) { %>
+        <section class="empty-state">
+          <p class="empty-text">No games yet.</p>
+        </section>
+      <% } else { %>
+        <% const defaultCover = "https://placehold.co/150x150?text=Game+Cover"; %>
+
+        <ul>
+          <% games.forEach((game) => { %>
+            <li>
+              <div>
+                <% const isFav = favoriteIds && favoriteIds.includes(String(game._id)); %>
+
+                <% if (isFav) { %>
+                  <form
+                    action="/games/<%= game._id %>/unfavorite"
+                    method="POST"
+                    style="display: inline"
+                  >
+                    <input type="hidden" name="next" value="/" />
+                    <button type="submit" class="btn">⭐ Unfavorite</button>
+                  </form>
+                <% } else { %>
+                  <form
+                    action="/games/<%= game._id %>/favorite"
+                    method="POST"
+                    style="display: inline"
+                  >
+                    <input type="hidden" name="next" value="/" />
+                    <button type="submit" class="btn">☆ Favorite</button>
+                  </form>
+                <% } %>
+              </div>
+
+              <div>
+                <img
+                  class="game-cover"
+                  src="<%= game.coverImageUrl || defaultCover %>"
+                  alt="<%= game.title %>"
+                />
+              </div>
+
+              <div>
+                <p>
+                  <a href="/games/<%= game._id %>"><%= game.title %></a>
+                </p>
+
+                <% if ((game.reviewCount || 0) === 0) { %>
+                  <p><strong>Rating:</strong> Unrated</p>
+                <% } else { %>
+                  <p>
+                    <strong>Avg:</strong>
+                    <%= Number(game.averageRating || 0).toFixed(1) %>/5
+                    (<%= game.reviewCount %> reviews)
+                  </p>
+                <% } %>
+
+                <% if (game.owner) { %>
+                  <p>
+                    — by
+                    <a href="/users/<%= game.owner._id %>"><%= game.owner.username %></a>
+                  </p>
+                <% } %>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </main>
+  </body>
+</html>

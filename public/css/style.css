@@ -43,6 +43,15 @@ nav a {
   border-radius: 6px;
 }
 
+nav a:hover {
+  background: rgba(0, 240, 255, 0.08);
+  color: #ff00ff;
+}
+
+.nav-logo {
+  color: #ffff00;
+}
+
 h1,
 h2,
 h3 {
@@ -75,29 +84,57 @@ a {
   text-decoration: none;
 }
 
-ul {
-  list-style: none;
-  margin-top: 12px;
+a:hover {
+  color: #ff00ff;
 }
 
-li {
-  background: #1a1f3a;
-  border: 2px solid rgba(0, 240, 255, 0.35);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
-  padding: 14px;
-  margin: 12px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+.btn,
+button {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 0;
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  text-decoration: none;
+  background: transparent;
+  border: 2px solid #00f0ff;
+  color: #00f0ff;
+  cursor: pointer;
 }
 
-img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+.btn:hover,
+button:hover {
+  border-color: #ff00ff;
+  color: #ff00ff;
+}
+
+.btn-primary {
+  border-color: #ffff00;
+  color: #ffff00;
+  box-shadow: 0 0 12px rgba(255, 255, 0, 0.25);
+}
+
+.btn-fav {
+  border-color: #ffff00;
+  color: #ffff00;
+}
+
+.btn-edit {
+  border-color: #00f0ff;
+  color: #00f0ff;
+}
+
+.btn-danger {
+  border-color: #ff6600;
+  color: #ff6600;
+}
+
+.panel {
+  background: rgba(5, 8, 18, 0.55);
   border: 2px solid rgba(0, 240, 255, 0.35);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+  padding: 18px;
+  margin-top: 16px;
 }
 
 form {
@@ -127,14 +164,62 @@ select {
   border: 2px solid rgba(0, 240, 255, 0.35);
 }
 
-button {
-  font-family: "Press Start 2P", cursive;
-  font-size: 12px;
-  padding: 10px 14px;
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.page-form {
+  display: block;
+  width: 100%;
+}
+
+.page-form input,
+.page-form select,
+.page-form textarea {
+  width: 100%;
+}
+
+.inline-form {
+  display: inline;
   background: transparent;
-  color: #00f0ff;
-  border: 2px solid #00f0ff;
-  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.game-cover,
+.cover {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.empty-state {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 16px;
+  border: 2px dashed rgba(0, 240, 255, 0.35);
+  background: rgba(5, 8, 18, 0.35);
+}
+
+.empty-text {
+  color: #b8c5db;
+  text-align: center;
 }
 
 .game-filters {
@@ -144,7 +229,6 @@ button {
   gap: 12px;
   align-items: flex-end;
   flex-wrap: wrap;
-
   background: #1a1f3a;
   border: 2px solid rgba(255, 0, 255, 0.25);
   box-shadow: 0 0 14px rgba(255, 0, 255, 0.15);
@@ -170,61 +254,6 @@ button {
 .game-filters a {
   margin-left: 10px;
   align-self: center;
-}
-
-.top-actions {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 16px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 0;
-  font-family: "Press Start 2P", cursive;
-  font-size: 12px;
-  text-decoration: none;
-  border: 2px solid #00f0ff;
-  color: #00f0ff;
-  background: transparent;
-}
-
-.btn-primary {
-  border-color: #ffff00;
-  color: #ffff00;
-  box-shadow: 0 0 12px rgba(255, 255, 0, 0.25);
-}
-
-.btn-fav {
-  border-color: #ffff00;
-  color: #ffff00;
-}
-
-.btn-edit {
-  border-color: #00f0ff;
-  color: #00f0ff;
-}
-
-.btn-danger {
-  border-color: #ff6600;
-  color: #ff6600;
-}
-
-.empty-state {
-  margin-top: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  padding: 22px 16px;
-  border: 2px dashed rgba(0, 240, 255, 0.35);
-  background: rgba(5, 8, 18, 0.35);
-}
-
-.empty-text {
-  color: #b8c5db;
-  text-align: center;
 }
 
 .games-list {
@@ -263,14 +292,13 @@ button {
   text-decoration: none;
 }
 
-.game-card__rating {
+.game-card__rating,
+.game-card__meta {
   margin: 0;
   color: #b8c5db;
 }
 
 .game-card__meta {
-  margin: 0;
-  color: #b8c5db;
   opacity: 0.9;
 }
 
@@ -290,69 +318,64 @@ button {
   display: block;
 }
 
-.game-cover {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+.top-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0 16px;
+  flex-wrap: wrap;
+}
+
+.hero {
+  text-align: center;
+}
+
+.features {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 12px;
+}
+
+.feature-card {
+  background: #1a1f3a;
+  border: 2px solid rgba(255, 0, 255, 0.25);
+  box-shadow: 0 0 14px rgba(255, 0, 255, 0.15);
+  padding: 14px;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.cta-text {
+  text-align: center;
+  font-size: 24px;
+  margin: 12px 0;
+}
+
+ul {
+  list-style: none;
+  margin-top: 12px;
+}
+
+li {
+  background: #1a1f3a;
   border: 2px solid rgba(0, 240, 255, 0.35);
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
-}
-
-.form-actions {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-}
-
-.inline-form {
-  display: inline;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cover {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-
-.panel {
-  background: rgba(5, 8, 18, 0.55);
-  border: 2px solid rgba(0, 240, 255, 0.35);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
-  padding: 18px;
-  margin-top: 16px;
-}
-
-textarea {
-  min-height: 160px;
-  resize: vertical;
-}
-
-.page-form label {
-  display: block;
-  width: 100%;
-}
-
-.page-form input,
-.page-form select,
-.page-form textarea {
-  width: 100%;
-}
-
-.page-form textarea {
-  min-height: 160px;
-  resize: vertical;
-}
-
-.page-form input[type="number"] {
-  max-width: 120px;
+  padding: 14px;
+  margin: 12px 0;
 }
 
 @media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
   .game-card {
     flex-direction: column;
     align-items: flex-start;
@@ -364,5 +387,9 @@ textarea {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  .game-filters button {
+    margin-left: 0;
   }
 }

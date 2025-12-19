@@ -58,6 +58,7 @@ h3 {
   font-family: "Press Start 2P", cursive;
   margin: 18px 0;
   text-align: center;
+  align-self: center;
 }
 
 h1 {
@@ -66,7 +67,8 @@ h1 {
 h2 {
   color: #ff00ff;
 }
-h3 {
+h3,
+h4 {
   color: #ffff00;
 }
 
@@ -342,6 +344,8 @@ img {
   border: 2px solid rgba(255, 0, 255, 0.25);
   box-shadow: 0 0 14px rgba(255, 0, 255, 0.15);
   padding: 14px;
+  display: flex;
+  justify-content: center;
 }
 
 .cta-actions {
@@ -363,7 +367,8 @@ ul {
   margin-top: 12px;
 }
 
-li, .favorite-container {
+li,
+.favorite-container {
   background: #1a1f3a;
   border: 2px solid rgba(0, 240, 255, 0.35);
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
@@ -374,7 +379,6 @@ li, .favorite-container {
   display: flex;
   gap: 20px;
 }
-
 
 @media (max-width: 768px) {
   .container {

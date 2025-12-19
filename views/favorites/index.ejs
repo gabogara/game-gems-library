@@ -25,12 +25,18 @@
             <div class="favorite-container">
               <div class="info-container">
                 <div>
-                  <img
-                    src="<%= game.coverImageUrl || defaultCover %>"
-                    alt="<%= game.title %>"
-                  />
+                  <a href="/games/<%= game._id %>">
+                <img
+                  class="game-cover"
+                  src="<%= game.coverImageUrl || defaultCover %>"
+                  alt="<%= game.title %>"
+                />
+              </a>
                 </div> 
                 <div>
+                <a href="/games/<%= game._id %>">
+                  <%= game.title %>
+                </a>
                   <p><strong>Genre:</strong> <%= game.genre %></p>
             
                   <% if (game.platform) { %>
@@ -44,8 +50,6 @@
                   <% if (game.description) { %>
                     <p><strong>Description:</strong> <%= game.description %></p>
                   <% } %>
-                
-                  <a href="/games/<%= game._id %>"><%= game.title %></a>
 
                 </div>
               </div>

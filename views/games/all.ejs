@@ -13,7 +13,7 @@
     <main class="container">
       <h1>Games by other users</h1>
 
-      <%- include("../partials/_gameFilters.ejs", { action: "/", resetUrl: "/", filters }) %>
+      <%- include("../partials/_gameFilters.ejs", { action: "/games/all", resetUrl: "/games/all", filters }) %>
 
       <% if (!games || games.length === 0) { %>
         <section class="empty-state">
